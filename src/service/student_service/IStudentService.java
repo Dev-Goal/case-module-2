@@ -10,5 +10,7 @@ public interface IStudentService {
     void delete(int idStudent);
     boolean isEmpty(int idStudent);
     void update(int idStudent, Student student);
+    Student search(int idStudent);
+
 
 }

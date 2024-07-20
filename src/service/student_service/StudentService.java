@@ -33,4 +33,9 @@ public class StudentService implements IStudentService{
     public void update(int idStudent, Student student) {
         iStudentRepository.update(idStudent, student);
     }
+
+    @Override
+    public Student search(int idStudent) {
+        return iStudentRepository.search(idStudent);
+    }
 }

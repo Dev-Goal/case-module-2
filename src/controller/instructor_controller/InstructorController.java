@@ -22,8 +22,9 @@ public class InstructorController {
                     "1. Thêm giảng viên \n" +
                     "2. Sửa giảng viên \n" +
                     "3. Xóa giảng viên \n" +
-                    "4. Hiển thị danh sách giảng viên \n" +
-                    "5. Quay về trang chủ");
+                    "4. Tìm kiếm giảng viên \n" +
+                    "5. Hiển thị danh sách giảng viên \n" +
+                    "6. Quay về trang chủ");
             System.out.print("Lựa chọn của bạn là: ");
             number = Integer.parseInt(scanner.nextLine());
             switch (number) {
@@ -37,9 +38,12 @@ public class InstructorController {
                     deleteInstructor();
                     break;
                 case 4:
-                    displayInstructor();
+                    searchInstructor();
                     break;
                 case 5:
+                    displayInstructor();
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Không có lựa chọn này");
@@ -112,6 +116,23 @@ public class InstructorController {
         if (message.equalsIgnoreCase("Có") || message.equalsIgnoreCase("Co")) {
             iInstructorService.update(idInstructor, instructor);
             System.out.println("Chỉnh sửa thành công");
+        }
+    }
+
+    private void searchInstructor() {
+        System.out.print("Nhập id giảng viên bạn muốn tìm kiếm: ");
+        int idInstructor = Integer.parseInt(scanner.nextLine());
+        Instructor instructor = iInstructorService.search(idInstructor);
+        if (instructor == null) {
+            System.out.println("Giảng viên không tồn tại");
+        } else {
+            System.out.print("Thông tin giảng viên: ");
+            System.out.println("Id: " + instructor.getIdInstructor());
+            System.out.println("Tên: " + instructor.getName());
+            System.out.println("Email: " + instructor.getEmail());
+            System.out.println("Số điện thoại: " + instructor.getPhone());
+            System.out.println("Ngày sinh: " + instructor.getLocalDate());
+            System.out.println("Cấp bậc: " + instructor.getGrade());
         }
     }
 }

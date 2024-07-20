@@ -24,8 +24,9 @@ public class StudentController {
                     "1. Thêm học viên \n" +
                     "2. Sửa học viên \n" +
                     "3. Xóa học viên \n" +
-                    "4. Hiển thị danh sách học viên \n" +
-                    "5. Quay về trang chủ");
+                    "4. Tìm kiếm học viên \n" +
+                    "5. Hiển thị danh sách học viên \n" +
+                    "6. Quay về trang chủ");
             System.out.print("Lựa chọn của bạn là: ");
             number = Integer.parseInt(scanner.nextLine());
             switch (number) {
@@ -39,9 +40,12 @@ public class StudentController {
                     deleteStudent();
                     break;
                 case 4:
-                    displayStudent();
+                    searchStudent();
                     break;
                 case 5:
+                    displayStudent();
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Không có lựa chọn này");
@@ -112,6 +116,23 @@ public class StudentController {
         if (message.equalsIgnoreCase("Có") || message.equalsIgnoreCase("Co")) {
             iStudentService.update(idStudent, student);
             System.out.println("Chỉnh sửa thành công");
+        }
+    }
+
+    private void searchStudent() {
+        System.out.print("Nhâp vào id học sinh bạn muốn tìm: ");
+        int idStudent = Integer.parseInt(scanner.nextLine());
+        Student student = iStudentService.search(idStudent);
+        if (student == null) {
+            System.out.println("Học viên không tồn tại");
+        } else {
+            System.out.println("Thông tin học viên");
+            System.out.println("Id: " + student.getIdStudent());
+            System.out.println("Tên: " + student.getName());
+            System.out.println("Email: " + student.getEmail());
+            System.out.println("Số điện thoại: " + student.getPhone());
+            System.out.println("Ngày sinh: " + student.getLocalDate());
+            System.out.println("Lớp: " + student.getClassName());
         }
     }
 }

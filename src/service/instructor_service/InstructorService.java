@@ -32,4 +32,9 @@ public class InstructorService implements IInstructorService{
     public void update(int idInstructor, Instructor instructor) {
         instructorRepository.update(idInstructor, instructor);
     }
+
+    @Override
+    public Instructor search(int idInstructor) {
+        return instructorRepository.search(idInstructor);
+    }
 }

@@ -10,6 +10,6 @@ public interface IInstructorService {
     void delete(int idInstructor);
     boolean isEmpty(int idInstructor);
     void update(int idInstructor, Instructor instructor);
-
+    Instructor search(int idInstructor);
 
 }

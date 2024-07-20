@@ -57,4 +57,14 @@ public class StudentRepository implements IStudentRepository{
             }
         }
     }
+
+    @Override
+    public Student search(int idStudent) {
+        for (Student student : listStudent) {
+            if (student.getIdStudent() == idStudent) {
+                return student;
+            }
+        }
+        return null;
+    }
 }

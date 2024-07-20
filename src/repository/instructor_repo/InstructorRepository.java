@@ -57,5 +57,13 @@ public class InstructorRepository implements IInstructorRepository{
         }
     }
 
-
+    @Override
+    public Instructor search(int idInstructor) {
+        for (Instructor instructor : listInstructor) {
+            if (instructor.getIdInstructor() == idInstructor) {
+                return instructor;
+            }
+        }
+        return null;
+    }
 }
