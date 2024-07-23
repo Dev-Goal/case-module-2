@@ -8,56 +8,47 @@ import service.student_service.StudentService;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class StudentController {
-    private IStudentService iStudentService = new StudentService();
-    private IStudentRepository iStudentRepository = new StudentRepository();
-    private Scanner scanner = new Scanner(System.in);
+    private final IStudentService iStudentService = new StudentService();
+    private final IStudentRepository iStudentRepository = new StudentRepository();
+
+    private final Scanner scanner = new Scanner(System.in);
 
     public void displayStudentFunctional() {
         int number;
         do {
-            System.out.println("Quản lý học viên: \n" +
-                    "1. Thêm học viên \n" +
-                    "2. Sửa học viên \n" +
-                    "3. Xóa học viên \n" +
-                    "4. Tìm kiếm học viên \n" +
-                    "5. Hiển thị danh sách học viên \n" +
-                    "6. Quay về trang chủ");
+            System.out.println("""
+                    Quản lý học viên:\s
+                    1. Thêm học viên\s
+                    2. Sửa học viên\s
+                    3. Xóa học viên\s
+                    4. Tìm kiếm học viên\s
+                    5. Hiển thị danh sách học viên\s
+                    6. Quay về trang chủ""");
             System.out.print("Lựa chọn của bạn là: ");
             number = Integer.parseInt(scanner.nextLine());
             switch (number) {
-                case 1:
-                    addStudent();
-                    break;
-                case 2:
-                    editStudent();
-                    break;
-                case 3:
-                    deleteStudent();
-                    break;
-                case 4:
-                    searchStudent();
-                    break;
-                case 5:
-                    displayStudent();
-                    break;
-                case 6:
+                case 1 -> addStudent();
+                case 2 -> editStudent();
+                case 3 -> deleteStudent();
+                case 4 -> searchStudent();
+                case 5 -> displayStudent();
+                case 6 -> {
                     return;
-                default:
-                    System.out.println("Không có lựa chọn này");
+                }
+                default -> System.out.println("Không có lựa chọn này");
             }
         }while (true);
     }
 
 
     public void displayStudent() {
-        List<Student> students = iStudentService.findStudent();
-        for (Student student : students) {
-            System.out.println(student);
+        List<Student> sortedStudents = iStudentService.sortByName();
+        for (Student student : sortedStudents) {
+            System.out.print(student);
         }
     }
 
@@ -120,19 +111,9 @@ public class StudentController {
     }
 
     private void searchStudent() {
-        System.out.print("Nhâp vào id học sinh bạn muốn tìm: ");
-        int idStudent = Integer.parseInt(scanner.nextLine());
-        Student student = iStudentService.search(idStudent);
-        if (student == null) {
-            System.out.println("Học viên không tồn tại");
-        } else {
-            System.out.println("Thông tin học viên");
-            System.out.println("Id: " + student.getIdStudent());
-            System.out.println("Tên: " + student.getName());
-            System.out.println("Email: " + student.getEmail());
-            System.out.println("Số điện thoại: " + student.getPhone());
-            System.out.println("Ngày sinh: " + student.getLocalDate());
-            System.out.println("Lớp: " + student.getClassName());
-        }
+        System.out.print("Nhâp vào tên học sinh bạn muốn tìm: ");
+        String nameStudent = scanner.nextLine();
+        List<Student> student = iStudentService.searchName(nameStudent);
+        System.out.print(student);
     }
 }

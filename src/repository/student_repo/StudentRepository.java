@@ -1,10 +1,12 @@
 package repository.student_repo;
 
 
+import model.Person;
 import model.Student;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class StudentRepository implements IStudentRepository{
@@ -15,13 +17,11 @@ public class StudentRepository implements IStudentRepository{
                 LocalDate.parse("2002-08-28"),  "C0524I1");
         Student student2 = new Student(2, "Tấn", "lvtan.20it1@vku.udn.vn", "0398769600",
                 LocalDate.parse("2002-01-14"),  "C0524I1");
+        Student student3 = new Student(3, "Phúc", "lmht721@gmail.com", "0912321321",
+                LocalDate.parse("2001-01-12"),  "C0524I1");
         listStudent.add(student1);
         listStudent.add(student2);
-    }
-
-    @Override
-    public List<Student> findStudent() {
-        return listStudent;
+        listStudent.add(student3);
     }
 
     @Override
@@ -31,11 +31,7 @@ public class StudentRepository implements IStudentRepository{
 
     @Override
     public void delete(int idStudent) {
-        for (Student student : listStudent) {
-            if (student.getIdStudent() == idStudent) {
-                listStudent.remove(student);
-            }
-        }
+        listStudent.removeIf(student -> student.getIdStudent() == idStudent);
     }
 
     @Override
@@ -59,12 +55,19 @@ public class StudentRepository implements IStudentRepository{
     }
 
     @Override
-    public Student search(int idStudent) {
+    public List<Student> searchName(String nameStudent) {
+        List<Student> newList = new ArrayList<>();
         for (Student student : listStudent) {
-            if (student.getIdStudent() == idStudent) {
-                return student;
+            if (student.getName().contains(nameStudent)) {
+                newList.add(student);
             }
         }
-        return null;
+        return newList;
+    }
+
+    @Override
+    public List<Student> sortName() {
+        listStudent.sort(Comparator.comparing(Person::getName));
+        return listStudent;
     }
 }

@@ -30,8 +30,8 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return "Học viên [ Mã học viên: " + idStudent
+        return "Mã học viên: " + idStudent
                 + super.toString()
-                + ", Lớp học: " + className + "]";
+                + ", Lớp học: " + className + "\n";
     }
 }

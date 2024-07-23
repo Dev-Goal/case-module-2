@@ -7,12 +7,7 @@ import repository.student_repo.StudentRepository;
 import java.util.List;
 
 public class StudentService implements IStudentService{
-    private IStudentRepository iStudentRepository = new StudentRepository();
-
-    @Override
-    public List<Student> findStudent() {
-        return iStudentRepository.findStudent();
-    }
+    private final IStudentRepository iStudentRepository = new StudentRepository();
 
     @Override
     public void add(Student student) {
@@ -35,7 +30,14 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public Student search(int idStudent) {
-        return iStudentRepository.search(idStudent);
+    public List<Student> searchName(String nameStudent) {
+        return iStudentRepository.searchName(nameStudent);
     }
+
+    @Override
+    public List<Student> sortByName() {
+        return iStudentRepository.sortName();
+    }
+
+
 }

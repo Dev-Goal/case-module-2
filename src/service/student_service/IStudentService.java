@@ -5,12 +5,11 @@ import model.Student;
 import java.util.List;
 
 public interface IStudentService {
-    List<Student> findStudent();
     void add(Student student);
     void delete(int idStudent);
     boolean isEmpty(int idStudent);
     void update(int idStudent, Student student);
-    Student search(int idStudent);
-
+    List<Student> searchName(String nameStudent);
+    List<Student> sortByName();
 
 }
