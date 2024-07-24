@@ -13,10 +13,11 @@ public class CodeGymManagement {
         Scanner scanner = new Scanner(System.in);
         int number;
         do {
-            System.out.println("Quản lý CodeGym: \n" +
-                    "1. Quản lý học viên \n" +
-                    "2. Quản lý giảng viên \n" +
-                    "3. Dừng chương trình");
+            System.out.println("""
+                    Quản lý CodeGym:\s
+                    1. Quản lý học viên\s
+                    2. Quản lý giảng viên\s
+                    3. Dừng chương trình""");
             System.out.print("Lựa chọn của bạn là: ");
             number = Integer.parseInt(scanner.nextLine());
             switch (number) {

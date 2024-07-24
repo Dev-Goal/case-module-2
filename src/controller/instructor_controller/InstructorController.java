@@ -18,47 +18,37 @@ public class InstructorController {
     public void displayInstructorFunctional() {
         int number;
         do {
-            System.out.println("Quản lý giảng viên: \n" +
-                    "1. Thêm giảng viên \n" +
-                    "2. Sửa giảng viên \n" +
-                    "3. Xóa giảng viên \n" +
-                    "4. Tìm kiếm giảng viên \n" +
-                    "5. Hiển thị danh sách giảng viên \n" +
-                    "6. Quay về trang chủ");
+            System.out.println("""
+                    Quản lý giảng viên:\s
+                    1. Thêm giảng viên\s
+                    2. Sửa giảng viên\s
+                    3. Xóa giảng viên\s
+                    4. Tìm kiếm giảng viên\s
+                    5. Hiển thị danh sách giảng viên\s
+                    6. Quay về trang chủ""");
             System.out.print("Lựa chọn của bạn là: ");
             number = Integer.parseInt(scanner.nextLine());
             switch (number) {
-                case 1:
-                    addInstructor();
-                    break;
-                case 2:
-                    editInstructor();
-                    break;
-                case 3:
-                    deleteInstructor();
-                    break;
-                case 4:
-                    searchInstructor();
-                    break;
-                case 5:
-                    displayInstructor();
-                    break;
-                case 6:
+                case 1 -> addInstructor();
+                case 2 -> editInstructor();
+                case 3 -> deleteInstructor();
+                case 4 -> searchInstructor();
+                case 5 -> displayInstructor();
+                case 6 -> {
                     return;
-                default:
-                    System.out.println("Không có lựa chọn này");
+                }
+                default -> System.out.println("Không có lựa chọn này");
             }
         }while (true);
     }
 
 
     public void displayInstructor() {
-        List<Instructor> instructors = iInstructorService.findInstructor();
-        for (Instructor instructor : instructors) {
-            if (instructor != null) {
-                System.out.println(instructor);
-            }
+        List<Instructor> sortedInstructors = iInstructorService.sortName();
+        for (Instructor instructor : sortedInstructors) {
+            System.out.print(instructor);
         }
+
     }
 
     private void addInstructor() {
@@ -120,19 +110,9 @@ public class InstructorController {
     }
 
     private void searchInstructor() {
-        System.out.print("Nhập id giảng viên bạn muốn tìm kiếm: ");
-        int idInstructor = Integer.parseInt(scanner.nextLine());
-        Instructor instructor = iInstructorService.search(idInstructor);
-        if (instructor == null) {
-            System.out.println("Giảng viên không tồn tại");
-        } else {
-            System.out.print("Thông tin giảng viên: ");
-            System.out.println("Id: " + instructor.getIdInstructor());
-            System.out.println("Tên: " + instructor.getName());
-            System.out.println("Email: " + instructor.getEmail());
-            System.out.println("Số điện thoại: " + instructor.getPhone());
-            System.out.println("Ngày sinh: " + instructor.getLocalDate());
-            System.out.println("Cấp bậc: " + instructor.getGrade());
-        }
+        System.out.print("Nhập vào tên giảng viên bạn muốn tìm kiếm: ");
+        String nameInstructor = scanner.nextLine();
+        List<Instructor> instructor = iInstructorService.searchName(nameInstructor);
+        System.out.print(instructor);
     }
 }

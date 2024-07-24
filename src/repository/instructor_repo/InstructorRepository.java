@@ -1,9 +1,12 @@
 package repository.instructor_repo;
 
 import model.Instructor;
+import model.Person;
+import model.Student;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class InstructorRepository implements IInstructorRepository{
@@ -58,12 +61,19 @@ public class InstructorRepository implements IInstructorRepository{
     }
 
     @Override
-    public Instructor search(int idInstructor) {
+    public List<Instructor> searchName(String nameInstructor) {
+        List<Instructor> newList = new ArrayList<>();
         for (Instructor instructor : listInstructor) {
-            if (instructor.getIdInstructor() == idInstructor) {
-                return instructor;
+            if (instructor.getName().contains(nameInstructor)) {
+                newList.add(instructor);
             }
         }
-        return null;
+        return newList;
     }
+
+    @Override
+    public List<Instructor> sortName() {
+            listInstructor.sort(Comparator.comparing(Person::getName));
+            return listInstructor;
+        }
 }

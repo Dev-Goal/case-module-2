@@ -1,6 +1,7 @@
 package repository.instructor_repo;
 
 import model.Instructor;
+import model.Student;
 
 import java.util.List;
 
@@ -10,5 +11,6 @@ public interface IInstructorRepository {
     void delete(int idInstructor);
     boolean isEmpty(int idInstructor);
     void update(int idInstructor, Instructor instructor);
-    Instructor search(int idInstructor);
+    List<Instructor> searchName(String nameInstructor);
+    List<Instructor> sortName();
 }

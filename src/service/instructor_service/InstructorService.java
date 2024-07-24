@@ -34,7 +34,13 @@ public class InstructorService implements IInstructorService{
     }
 
     @Override
-    public Instructor search(int idInstructor) {
-        return instructorRepository.search(idInstructor);
+    public List<Instructor> searchName(String nameInstructor) {
+        return instructorRepository.searchName(nameInstructor);
     }
+
+    @Override
+    public List<Instructor> sortName() {
+        return instructorRepository.sortName();
+    }
+
 }
